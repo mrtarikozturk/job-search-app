@@ -10,13 +10,19 @@ const Router = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name='Intro' component={Introduction} />
+            <Stack.Navigator
+                initialRouteName={Introduction}
+                screenOptions={{
+                    headerShown: false,
+                    gestureEnabled: true,
+                    gestureDirection: "horizontal"
+                }}
+            >
+                <Stack.Screen name='Intro' component={Introduction} options={{ title: 'Giris Sayfasi' }} />
                 <Stack.Screen name='Jobs' component={Jobs} />
                 <Stack.Screen name='SavedJobs' component={SavedJobs} />
             </Stack.Navigator>
         </NavigationContainer>
-
     )
 }
 
