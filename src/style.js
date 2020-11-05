@@ -67,4 +67,27 @@ export const jobItem = StyleSheet.create({
     },
 });
 
+// ModalX Component
+export const modalx = StyleSheet.create({
+    container: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 10,
+    },
+    header: {
+        borderBottomWidth: 2,
+        borderColor: '#bdbdbd',
+        padding: 5,
+        margin: 5,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    description: {
+        padding: 5,
+        margin: 5,
+    }
+
+})
 
