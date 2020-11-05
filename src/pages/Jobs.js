@@ -5,6 +5,7 @@ import axios from 'axios';
 //My Import
 import { JobItem, ModalX } from '../components';
 import { jobs } from '../style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Jobs = (props) => {
 
@@ -16,15 +17,15 @@ const Jobs = (props) => {
     const [ModalFlag, setModalFlag] = useState(false);
     const [selectedJob, setSelectedJob] = useState('');
 
+    // useEffects
+    useEffect(() => { fetchData() }, []);
 
+    // Functions
     const fetchData = async () => {
         const response = await axios.get(`https://jobs.github.com/positions.json?search=${selectedLanguage.toLowerCase()}`);
 
         setData(response.data);
     }
-    console.log(data);
-
-    useEffect(() => { fetchData() }, []);
 
     const renderJobs = ({ item }) => {
 
@@ -40,7 +41,21 @@ const Jobs = (props) => {
         setModalFlag(true);
         setSelectedJob(job);
     }
-    
+
+    const saveJob = async () => {
+        let storageList = await AsyncStorage.getItem('@SAVED_JOBS').catch(err => console.log(err));
+
+        storageList = storageList == null ? [] : JSON.parse(storageList);
+
+        const newList = [...storageList, selectedJob];
+
+        await AsyncStorage.setItem('@SAVED_JOBS', JSON.stringify(newList));
+
+        setModalFlag(false);
+    }
+
+    const closeModalX = () => setModalFlag(false);
+
     return (
         <View style={jobs.container}>
             <View style={jobs.header}>
@@ -53,8 +68,9 @@ const Jobs = (props) => {
             />
             <ModalX
                 isVisible={ModalFlag}
-                closeModalX={() => setModalFlag(false)}
+                closeModalX={closeModalX}
                 data={selectedJob}
+                save={saveJob}
             />
         </View>
     )

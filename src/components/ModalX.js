@@ -6,6 +6,8 @@ import Modal from 'react-native-modal';
 import { modalx } from '../style';
 
 const ModalX = (props) => {
+
+
     return (
         <Modal
             isVisible={props.isVisible}
@@ -20,7 +22,7 @@ const ModalX = (props) => {
                 <View style={modalx.description}>
                     <Text numberOfLines={5}>{props.data.description}</Text>
                 </View>
-                <Button title='Save' onPress={props.saveJob} />
+                <Button title='Save' onPress={props.save} />
             </View>
         </Modal>
     )
