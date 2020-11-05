@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+// Introduction Page
 export const introduction = StyleSheet.create({
     container: {
         flex: 1,
@@ -18,3 +19,15 @@ export const introduction = StyleSheet.create({
     }
 })
 
+// TopicItem Component
+export const topicItem = StyleSheet.create({
+    container: {
+        padding: 14,
+        margin: 5,
+        borderRadius: 8,
+    },
+    text: {
+        fontWeight: 'bold',
+        color: 'white',
+    }
+})

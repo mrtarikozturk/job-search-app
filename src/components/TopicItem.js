@@ -1,11 +1,16 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 
-const TopicItem = () => {
+//My Import
+import { topicItem } from '../style'
+
+const TopicItem = (props) => {
     return (
-        <View>
-            <Text>JS</Text>
-        </View>
+        <TouchableOpacity
+            style={[topicItem.container, { backgroundColor: props.item.color }]}
+            onPress={props.onPress}>
+            <Text style={topicItem.text}>{props.item.name}</Text>
+        </TouchableOpacity>
     )
 }
 

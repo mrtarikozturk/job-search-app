@@ -54,7 +54,7 @@ const topics = [
     },
 ]
 
-const Introduction = (prop) => {
+const Introduction = (props) => {
 
     function selectLanguage(language) {
         props.navigation.navigate('Jobs', { selectedLanguage: language })
