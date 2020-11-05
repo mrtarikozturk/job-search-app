@@ -3,7 +3,7 @@ import { View, Text, FlatList } from 'react-native';
 import axios from 'axios';
 
 //My Import
-import { JobItem } from '../components';
+import { JobItem, ModalX } from '../components';
 import { jobs } from '../style';
 
 const Jobs = (props) => {
@@ -13,6 +13,9 @@ const Jobs = (props) => {
 
     //States
     const [data, setData] = useState({});
+    const [ModalFlag, setModalFlag] = useState(false);
+    const [selectedJob, setSelectedJob] = useState('');
+
 
     const fetchData = async () => {
         const response = await axios.get(`https://jobs.github.com/positions.json?search=${selectedLanguage.toLowerCase()}`);
@@ -33,8 +36,11 @@ const Jobs = (props) => {
         )
     }
 
-    const selectJob = (job) => { }
-
+    const selectJob = (job) => {
+        setModalFlag(true);
+        setSelectedJob(job);
+    }
+    
     return (
         <View style={jobs.container}>
             <View style={jobs.header}>
@@ -44,6 +50,11 @@ const Jobs = (props) => {
                 data={data}
                 renderItem={renderJobs}
                 key={(_, index) => index.toSting()}
+            />
+            <ModalX
+                isVisible={ModalFlag}
+                closeModalX={() => setModalFlag(false)}
+                data={selectedJob}
             />
         </View>
     )

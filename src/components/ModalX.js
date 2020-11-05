@@ -8,7 +8,7 @@ import { modalx } from '../style';
 const ModalX = (props) => {
     return (
         <Modal
-            isVisible={props.isVisibile}
+            isVisible={props.isVisible}
             onBackdropPress={props.closeModalX}
         >
             <View style={modalx.container}>
@@ -20,7 +20,7 @@ const ModalX = (props) => {
                 <View style={modalx.description}>
                     <Text numberOfLines={5}>{props.data.description}</Text>
                 </View>
-                <Button title='Save' onPress={saveJob} />
+                <Button title='Save' onPress={props.saveJob} />
             </View>
         </Modal>
     )
