@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //My imports
@@ -18,8 +18,15 @@ const SavedJobs = () => {
             })
     }, [])
 
+    const clearAllJobs = async () => {
+        const list = await AsyncStorage.removeItem('@SAVED_JOBS');
+        setJobList(list);
+        alert('All jobs are deleted!');
+    }
+
     return (
         <View>
+            <Button title='Clear All Jobs' onPress={clearAllJobs} />
             <FlatList
                 data={jobList}
                 renderItem={({ item }) => <JobItem data={item} />}
