@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Button } from 'react-native';
 import axios from 'axios';
 
 //My Import
@@ -47,11 +47,16 @@ const Jobs = (props) => {
 
         storageList = storageList == null ? [] : JSON.parse(storageList);
 
-        const newList = [...storageList, selectedJob];
+        if (storageList.findIndex(item => item.id === selectedJob.id) === -1) {
+            const newList = [...storageList, selectedJob];
 
-        await AsyncStorage.setItem('@SAVED_JOBS', JSON.stringify(newList));
+            await AsyncStorage.setItem('@SAVED_JOBS', JSON.stringify(newList));
 
-        setModalFlag(false);
+            setModalFlag(false);
+        }
+        else {
+            alert('This job is already added to the list');
+        }
     }
 
     const closeModalX = () => setModalFlag(false);
@@ -61,11 +66,13 @@ const Jobs = (props) => {
             <View style={jobs.header}>
                 <Text style={jobs.headerText}>JOBS FOR {selectedLanguage.toUpperCase()}</Text>
             </View>
+            <Button title='Show Records' onPress={() => props.navigation.navigate('SavedJobs')} />
             <FlatList
                 data={data}
                 renderItem={renderJobs}
                 key={(_, index) => index.toSting()}
             />
+
             <ModalX
                 isVisible={ModalFlag}
                 closeModalX={closeModalX}
